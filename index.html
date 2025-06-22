@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neumorphic</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Playfair+Display&family=Fira+Sans&family=Montserrat&display=swap" rel="stylesheet">
+<style>
+/* ===== Global Base ===== */
+
+:root {
+  --color-1: #6c5ce7;
+  --color-2: #00cec9;
+  --color-3: #fd79a8;
+  --color-4: #e17055;
+  --color-5: #0984e3;
+
+  --theme-color: var(--color-1);
+  --font-main: 'Georgia', sans-serif;
+
+  --bg-light: #e0e0e0;
+  --bg-dark: #1e1e1e;
+  --text-light: #1e1e1e;
+  --text-dark: #e0e0e0;
+  --radius: 12px;
+  --shadow-inset-light: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+  --shadow-inset-dark: inset 6px 6px 12px #141414, inset -6px -6px 12px #2c2c2c;
+  --shadow-out-light: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+  --shadow-out-dark: 6px 6px 12px #141414, -6px -6px 12px #2c2c2c;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent; 
+  -webkit-user-select: none; 
+  user-select: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  color: var(--theme-color);
+  background-color: var(--bg-dark);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition: all color 0.3s ease;
+}
+
+body.light {
+  background-color: var(--bg-light);
+  color: var(--theme-color);
+}
+
+/* ===== Neumorphic Section ===== */
+.neumorphic {
+  border-radius: var(--radius);
+  transition: all color 0.3s ease;
+}
+body.light .neumorphic {
+  background: var(--bg-light);
+  box-shadow: var(--shadow-out-light);
+}
+body.dark .neumorphic {
+  background: var(--bg-dark);
+  box-shadow: var(--shadow-out-dark);
+}
+
+body.dark .neumorphic:active {
+  box-shadow: var(--shadow-inset-dark);
+}
+body.light .neumorphic:active {
+  box-shadow: var(--shadow-inset-light);
+}
+
+.neumorphic:hover {
+  box-shadow: 0 0 12px var(--theme-color);
+}
+.neumorphic:hover:not(.no-hover) {
+  box-shadow: 0 0 12px var(--theme-color);
+}
+
+.box-inout {
+  border-radius: var(--radius);
+  background: var(--bg-light); 
+  box-shadow: var(--shadow-out-light); 
+  transition: all color 0.3s ease;
+}
+body.dark .box-inout {
+  background: var(--bg-dark);
+  box-shadow: var(--shadow-out-dark);
+}
+
+.box-inset {
+  border-radius: var(--radius);
+  background: var(--bg-light);
+  box-shadow: var(--shadow-inset-light);
+  transition: all color 0.3s ease;
+}
+body.dark .box-inset {
+  background: var(--bg-dark);
+  box-shadow: var(--shadow-inset-dark);
+}
+
+/* ===== Floating Section ===== */
+.floating-settings {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1000;
+  padding: 12px;
+  border-radius: var(--radius);
+}
+
+.floating-settings button {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: var(--theme-color);
+  cursor: pointer;
+}
+
+.settings-panel {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: inherit;
+}
+
+.settings-panel.hidden {
+  display: none;
+}
+
+.setting-group {
+  margin-bottom: 10px;
+}
+
+.setting-group label {
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 5px;
+  color: var(--theme-color);
+}
+
+.setting-group select {
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--radius);
+  border: none;
+  background: transparent;
+  color: var(--theme-color);
+  font-family: var(--font-main);
+}
+
+.color-options {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.color-swatch {
+  width: 25px;
+  height: 25px;
+  border-radius: var(--radius);
+  border: 2px solid var(--bg-dark);
+  cursor: pointer;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+.color-swatch.active {
+  outline: 2px solid var(--theme-color);
+  outline-offset: 2px;
+}
+
+.color-1 { background-color: var(--color-1); }
+.color-2 { background-color: var(--color-2); }
+.color-3 { background-color: var(--color-3); }
+.color-4 { background-color: var(--color-4); }
+.color-5 { background-color: var(--color-5); }
+
+.rotating-gear {
+  animation: spin 3s linear infinite;
+  font-size: 24px; /* sesuaikan ukuran */
+}
+
+/* Keyframe animasi berputar */
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== Preloader Section ===== */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: all color 0.3s ease;
+}
+
+.preload {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: var(--theme-color);
+  border-radius: var(--radius);
+}
+
+.preloader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.light .preloader {
+  background: var(--bg-light);
+}
+
+/* ===== Elemen Section ===== */
+
+.typed-text {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--theme-color);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  color: var(--theme-color);
+}
+
+footer a {
+  color: var(--theme-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 0.3rem;
+  cursor: pointer;
+}
+
+/* ===== Home Section ===== */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 15px;
+}
+
+.profile-photo {
+  width: 120px; /* atau sesuai kebutuhan */
+  height: 120px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  padding: 3px; /* kasih ruang untuk efek shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 0 12px var(--theme-color);
+}
+
+body.light .profile-photo img {
+  box-shadow: 0 0 12px var(--theme-color);
+}
+
+.profile-name h1 {
+  text-align: center;
+  margin: 20px 0 5px;
+  font-size: 3rem;
+  color: var(--theme-color);
+}
+
+.profile-bio {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  max-width: 1000px;
+  font-size: 0.7rem;
+  color: var(--theme-color);
+}
+
+.profile-socials {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 25px 0;
+}
+
+.profile-socials a i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  color: var(--theme-color);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all color 0.3s ease;
+  outline: none;
+  border: none;
+} 
+
+.daily-routine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px 0;
+  text-align: center;
+  gap: 15px;
+}
+
+.routine-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap; /* Biar responsif di mobile */
+}
+
+.routine-icons i {
+  font-size: 18px;
+  padding: 15px;
+  border-radius: var(--radius);
+  color: var(--theme-color);
+  transition: all color 0.3s ease;
+}
+
+.routine-quote {
+  font-size: 10px;
+  padding: 15px;
+  line-height: 1.4;
+  color: var(--theme-color);
+}
+
+/* ============================== */
+/* ==  PRODUCT MARKET ONLINE == */
+/* ============================== */
+
+.shop-section {
+  font-family: var(--font-family);
+  margin-top: 30px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.shop-section i {
+  font-size: 40px;
+  text-align: center;
+}
+.shop-section h3 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.shop-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.shop-categories button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: var(--font-main); 
+  color: var(--theme-color);
+  text-align: center;
+}
+
+/* Produk Scroll Wrapper */
+.scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+/* Container scroll horizontal */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 0 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {    
+  border-radius: var(--radius);
+}
+
+/* Item Produk */
+.product-item {
+  display: flex; /* atau block, asal bukan inline-block */
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 100%; /* Satu produk per layar */
+  max-width: 320px;
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--theme-color);
+  box-sizing: border-box;
+}
+
+.product-item img {
+  width: 70%;
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+}
+
+/* Tombol Order */
+.order-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  color: var(--theme-color);
+  border-radius: var(--radius);
+  text-decoration: none; 
+}
+
+/* Tombol Scroll ← → */
+.scroll-buttons {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.scroll-buttons button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 15px;
+  color: var(--theme-color);
+  cursor: pointer;
+  transition: all color 0.3s ease;
+}
+
+/* ===== Responsibilities Layout ===== */
+
+@media (max-width: 680px) {
+  body { 
+    padding: 1rem;
+  }
+  .profile-photo img {
+    width: 90px;
+    height: 90px;
+  }
+  .profile-name h1 {
+    font-size: 2rem;
+  }
+  .profile-bio {
+    font-size: 0.7rem;
+  }
+  .profile-socials i {
+    font-size: 1.4rem;
+  }
+  .stat-box strong {
+    font-size: 1rem;
+  }
+  .stat-box span {
+    font-size: 0.75rem;
+  }
+  .setting-group label,
+  .setting-group select {
+    font-size: 0.85rem;
+  }
+  .floating-settings button {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 681px) {
+  body { 
+    padding: 2rem;
+  }
+  .floating-settings {
+    position: fixed;
+    top: 90px;
+    right: 40px;
+    z-index: 1000;
+    padding: 12px;
+    border-radius: var(--radius);
+  }
+  .profile-section {
+    padding: 40px 40px;
+  }
+  .profile-photo {
+    width: 160px; /* atau sesuai kebutuhan */
+    height: 160px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    padding: 20px; /* kasih ruang untuk efek shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin-bottom: 20px;
+  }
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 0 0 12px var(--theme-color);
+  }
+  body.light .profile-photo img {
+    box-shadow: 0 0 12px var(--theme-color);
+  }
+  .profile-name h1 {
+    font-size: 3.5rem;
+  }
+  .profile-bio {
+    font-size: 1.05rem;
+    max-width: 600px;
+  }
+  .profile-socials i {
+    font-size: 1.5rem;
+  }
+  .stat-box strong {
+    font-size: 1.3rem;
+  }
+  .stat-box span {
+    font-size: 1rem;
+  }
+}
+</style>
+</head>
+<body class="dark" data-theme-color="color-1" data-font="Georgia" oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
+
+  <!-- Floating Settings -->
+  <div class="floating-settings neumorphic">
+    <button id="settingsToggle" title="Settings"><i class="fas fa-gear rotating-gear"></i></button>
+    <div class="settings-panel box-inset hidden" id="settingsPanel">
+      <div class="setting-group">
+      <label>Color</label>
+      <div id="colorSelector" class="color-options">
+      <div class="color-swatch color-1" data-color="color-1"></div>
+      <div class="color-swatch color-2" data-color="color-2"></div>
+      <div class="color-swatch color-3" data-color="color-3"></div>
+      <div class="color-swatch color-4" data-color="color-4"></div>
+      <div class="color-swatch color-5" data-color="color-5"></div>
+      </div>
+      </div>
+      <div class="setting-group">
+        <label>Font</label>
+        <select id="fontSelector">
+          <option value="'Georgia', serif">Georgia</option>
+          <option value="Roboto">Roboto</option>
+          <option value="Montserrat">Montserrat</option>
+          <option value="'Segoe UI', sans-serif">Segoe UI</option>
+          <option value="'Courier New', monospace">Courier New</option>
+          <option value="'Comic Sans MS', cursive">Comic Sans</option>
+          <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <label>Theme</label>
+        <select id="themeSelector">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+    </div>
+   </div>
+   
+  <!-- Preloader -->
+  <div class="preloader" id="Preloader">
+  <div class="preload neumorphic" id="secretLoader" title="Secret Loader">
+    <i class="fas fa-music"></i>
+  </div>
+  </div>
+
+  <!-- Profile Section -->
+  <header class="profile-section">
+    <div class="profile-photo neumorphic">
+     <a href="#" onclick="location.reload();">
+  <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="neumorphic">
+     </a>
+    </div>
+      <!-- Social Media -->
+      <div class="profile-socials">
+        <a href="#"><i class="fab fa-youtube neumorphic"></i></a>
+        <a href="#"><i class="fab fa-instagram neumorphic"></i></a>
+        <a href="#"><i class="fab fa-telegram neumorphic"></i></a>
+        <a href="#"><i class="fas fa-envelope neumorphic"></i></a>
+      </div>
+    <div class="profile-info">      
+      <div class="profile-name">
+        <h1>NEUMORPHIC</h1>
+      </div>
+      
+      <div class="typed-text"><span id="typed"></span></div>               
+      
+      <p class="profile-bio">
+      Celebrating the artistic and cultural heritage that has existed since ancient times, makes us really like challenges & learning new things in the rapid development of technology.
+      </p>
+      
+<section class="shop-section box-inout">
+  <i class="fas fa-shop" title="market"></i>
+  <h2>Online Store</h2>
+
+  <!-- Kategori Navigasi -->
+  <nav class="shop-categories">
+    <button class="neumorphic" data-category="clothes">Clothes</button>
+    <button class="neumorphic" data-category="trousers">Trousers</button>
+    <button class="neumorphic" data-category="accessories">Accessories</button>
+  </nav>
+
+  <!-- Wrapper Scroll Horizontal -->
+  <div class="scroll-wrapper box-inset">
+    <div class="scroll-container" id="productScroll">
+      <!-- CLOTHES -->
+      <div class="product-item" data-category="clothes">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+        <h3>Clothes A</h3>
+        <p>IDR 50K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>
+      <div class="product-item" data-category="clothes">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+        <h3>Clothes B</h3>
+        <p>IDR 50K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>
+
+      <!-- TROUSERS -->
+      <div class="product-item" data-category="trousers">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+        <h3>Trousers A</h3>
+        <p>IDR 100K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>
+      <div class="product-item" data-category="trousers">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+        <h3>Trousers B</h3>
+        <p>IDR 50K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>
+
+      <!-- ACCESSORIES -->
+      <div class="product-item" data-category="accessories">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+        <h3>Shoes</h3>
+        <p>IDR 150K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>    
+      <div class="product-item" data-category="accessories">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+        <h3>Watches</h3>
+        <p>IDR 50K</p>
+        <a href="#" class="order-btn neumorphic">Order</a>
+      </div>
+    </div>
+  </div>
+    <div class="scroll-buttons">
+      <button id="prevBtn" class="neumorphic" onclick="scrollLeft()">←</button>
+      <button id="nextBtn" class="neumorphic" onclick="scrollRight()">→</button>
+    </div>
+</section>
+      
+      <!-- Daily Routine Icons -->
+      <div class="daily-routine box-inout">
+      <div class="routine-icons">
+        <i class="fas fa-bed box-inset" title="sleep"></i>
+        <i class="fas fa-shower box-inset" title="bathe"></i>
+        <i class="fas fa-utensils box-inset" title="food"></i>
+        <i class="fas fa-gamepad box-inset" title="game"></i>
+        <i class="fas fa-redo-alt box-inset" title="repeat"></i>
+      </div>
+      <p class="routine-quote">
+      All these activities are considered legitimate because they fall under the "rules" or principles of individual freedom and expression, and are symbolically or culturally protected by the community or society in the "scene".
+      </p>
+      </div>
+
+  <!-- Footer -->
+  <footer class="neumorphic">
+  <a href="https://artkillers.github.io">© Art Killers • All Rights Reserved.</a>
+  </footer>
+  </div>
+  </header>
+    
+<audio id="audio" preload="metadata"></audio>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  const scrollBox = document.getElementById('productScroll');
+  const allItems = Array.from(document.querySelectorAll('.product-item'));
+  const categoryButtons = document.querySelectorAll('.shop-categories button');
+
+  let currentCategory = 'clothes';
+  let currentPage = 0;
+  const itemsPerPage = 1;
+
+  function renderItems() {
+    const filtered = allItems.filter(item => item.dataset.category === currentCategory);
+
+    scrollBox.innerHTML = '';
+
+    const start = currentPage * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    filtered.slice(start, end).forEach(item => {
+      scrollBox.appendChild(item);
+    });
+
+    document.getElementById('prevBtn').disabled = currentPage === 0;
+    document.getElementById('nextBtn').disabled = end >= filtered.length;
+  }
+
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentCategory = btn.dataset.category;
+      currentPage = 0;
+      renderItems();
+    });
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentPage > 0) {
+      currentPage--;
+      renderItems();
+    }
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    const filtered = allItems.filter(item => item.dataset.category === currentCategory);
+    if ((currentPage + 1) * itemsPerPage < filtered.length) {
+      currentPage++;
+      renderItems();
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    renderItems();
+  });
+</script>
+<script>
+// Toggle Panel Settings
+const settingsToggle = document.getElementById("settingsToggle");
+const settingsPanel = document.getElementById("settingsPanel");
+
+// Buka/tutup panel saat tombol di-klik
+settingsToggle.addEventListener("click", (e) => {
+  e.stopPropagation(); // mencegah event bubbling
+  settingsPanel.classList.toggle("hidden");
+});
+
+// Tutup panel jika klik di luar
+document.addEventListener("click", (e) => {
+  if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
+    settingsPanel.classList.add("hidden");
+  }
+});
+
+// Theme Toggle (dark / light)
+const themeSelector = document.getElementById("themeSelector");
+themeSelector.addEventListener("change", () => {
+  const theme = themeSelector.value;
+  document.body.classList.remove("dark", "light");
+  document.body.classList.add(theme);
+});
+
+// Font Toggle (updates --font-main)
+const fontSelector = document.getElementById("fontSelector");
+fontSelector.addEventListener("change", () => {
+  const font = fontSelector.value;
+  document.documentElement.style.setProperty("--font-main", font);
+});
+
+// Color Swatch Toggle
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+  swatch.addEventListener('click', () => {
+    const colorClass = swatch.getAttribute("data-color");
+    const colorValue = getComputedStyle(document.documentElement).getPropertyValue(`--${colorClass}`);
+    document.documentElement.style.setProperty("--theme-color", colorValue.trim());
+
+    // Highlight swatch aktif
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    swatch.classList.add('active');
+  });
+});
+
+// Neumorphic press effect
+document.querySelectorAll('.neumorphic').forEach(el => {
+  el.addEventListener('mousedown', () => el.classList.add('pressed'));
+  el.addEventListener('mouseup', () => el.classList.remove('pressed'));
+  el.addEventListener('mouseleave', () => el.classList.remove('pressed'));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("Preloader");
+  const secretLoader = document.getElementById("secretLoader");
+
+  // Klik untuk langsung buka
+  secretLoader.addEventListener("click", () => {
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 300); // tunggu animasi fade-out
+  });
+});
+
+const typed = new Typed("#typed", {
+  strings: ["Tech Explorer","Art Enthusiast","Creative Digital","Development Stream"],
+  typeSpeed: 60,
+  backSpeed: 40,
+  backDelay: 1500,
+  loop: true,
+});
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
+</script>
+</body>
+</html>
