@@ -194,6 +194,10 @@ body.dark .box-inset {
 }
 
 /* ===== Preloader Section ===== */
+body.loading {
+  overflow: hidden;
+}
+
 .preloader {
   position: fixed;
   top: 0;
@@ -204,7 +208,7 @@ body.dark .box-inset {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 99999;
   transition: all color 0.3s ease;
 }
 
@@ -828,12 +832,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("Preloader");
   const secretLoader = document.getElementById("secretLoader");
 
-  // Klik untuk langsung buka
   secretLoader.addEventListener("click", () => {
     preloader.style.opacity = "0";
+    document.body.classList.remove("loading"); // aktifkan scroll
     setTimeout(() => {
       preloader.style.display = "none";
-    }, 300); // tunggu animasi fade-out
+    }, 300);
   });
 });
 
