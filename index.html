@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neumorphic</title>
+  <title>Art Killers</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Playfair+Display&family=Fira+Sans&family=Montserrat&display=swap" rel="stylesheet">
 <style>
@@ -75,13 +75,6 @@ body.dark .neumorphic:active {
 }
 body.light .neumorphic:active {
   box-shadow: var(--shadow-inset-light);
-}
-
-.neumorphic:hover {
-  box-shadow: 0 0 12px var(--theme-color);
-}
-.neumorphic:hover:not(.no-hover) {
-  box-shadow: 0 0 12px var(--theme-color);
 }
 
 .box-inout {
@@ -194,9 +187,6 @@ body.dark .box-inset {
 }
 
 /* ===== Preloader Section ===== */
-body.loading {
-  overflow: hidden;
-}
 
 .preloader {
   position: fixed;
@@ -225,6 +215,7 @@ body.loading {
 
 .preloader.hidden {
   opacity: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -330,38 +321,6 @@ body.light .profile-photo img {
   border: none;
 } 
 
-.daily-routine {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  padding: 20px 0;
-  text-align: center;
-  gap: 15px;
-}
-
-.routine-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap; /* Biar responsif di mobile */
-}
-
-.routine-icons i {
-  font-size: 18px;
-  padding: 15px;
-  border-radius: var(--radius);
-  color: var(--theme-color);
-  transition: all color 0.3s ease;
-}
-
-.routine-quote {
-  font-size: 10px;
-  padding: 15px;
-  line-height: 1.4;
-  color: var(--theme-color);
-}
-
 /* ============================== */
 /* ==  PRODUCT MARKET ONLINE == */
 /* ============================== */
@@ -369,6 +328,7 @@ body.light .profile-photo img {
 .shop-section {
   font-family: var(--font-family);
   margin-top: 30px;
+  margin-bottom: 30px;
   padding: 40px 20px;
   text-align: center;
 }
@@ -404,48 +364,40 @@ body.light .profile-photo img {
 
 /* Produk Scroll Wrapper */
 .scroll-wrapper {
-  width: 100%;
   overflow: hidden;
-  margin-top: 20px;
+  width: 100%;
 }
 
-/* Container scroll horizontal */
 .scroll-container {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 0 10px;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
-.scroll-container::-webkit-scrollbar {
-  height: 6px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {    
-  border-radius: var(--radius);
-}
-
-/* Item Produk */
 .product-item {
-  display: flex; /* atau block, asal bukan inline-block */
+  flex: 0 0 100%;
+  max-width: 100%;
+  scroll-snap-align: center;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 0 100%; /* Satu produk per layar */
-  max-width: 320px;
-  scroll-snap-align: start;
-  border-radius: var(--radius);
   padding: 20px;
-  margin: 0 auto;
-  text-align: center;
-  color: var(--theme-color);
   box-sizing: border-box;
+  text-align: center;
 }
 
 .product-item img {
   width: 70%;
   border-radius: var(--radius);
   margin-bottom: 10px;
+  box-shadow: 0 0 12px var(--theme-color);
+}
+
+body.light .profile-photo img {
+  box-shadow: 0 0 12px var(--theme-color);
 }
 
 /* Tombol Order */
@@ -461,7 +413,8 @@ body.light .profile-photo img {
 /* Tombol Scroll ← → */
 .scroll-buttons {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -475,6 +428,219 @@ body.light .profile-photo img {
   color: var(--theme-color);
   cursor: pointer;
   transition: all color 0.3s ease;
+}
+
+/* Cart Container */
+.cart-section {
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+/* Scroll Box untuk daftar item */
+.cart-scroll {
+  max-height: 160px;
+  min-height: 160px;
+  overflow-y: auto;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: var(--radius);
+}
+
+/* Daftar item */
+#cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#cart-list li {
+  max-height: 30px;
+  line-height: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 14px;
+  margin-bottom: 6px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--theme-color);
+  font-size: 14px;
+}
+
+/* Tombol Cancel */
+.remove-btn {
+  border: none;
+  color: var(--theme-color);
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Total & Tombol Order */
+#cart-total {
+  margin: 10px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#whatsapp-link {
+  padding: 10px;
+  border-radius: var(--radius);
+  color: var(--theme-color);
+  text-decoration: none;
+  font-size: 15px;
+  transition: all color 0.3s ease;
+}
+
+#clear-cart {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: var(--radius);
+  color: var(--theme-color);
+  text-decoration: none;
+  font-size: 15px;
+  font-family: var(--font-main);
+  transition: all color 0.3s ease;
+}
+  
+#clear-cart {
+  border: none;
+  outline: none;
+}
+
+#clear-cart:focus {
+  outline: none;
+}  
+
+/* ============================== */
+/* ==  DAILY ROUTINE AND MUSIC == */
+/* ============================== */
+
+.daily-routine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 20px 0;
+  text-align: center;
+  gap: 15px;
+}
+
+.routine-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap; /* Biar responsif di mobile */
+}
+
+.routine-icons i {
+  font-size: 18px;
+  padding: 15px;
+  border-radius: var(--radius);
+  color: var(--theme-color);
+  transition: all color 0.3s ease;
+}
+
+.routine-quote {
+  font-size: 10px;
+  padding: 15px;
+  line-height: 1.4;
+  color: var(--theme-color);
+}
+
+.music-section {
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 1000px;
+  text-align: center;
+  font-family: var(--font-family);
+} 
+
+.music { margin-bottom: 30px; }
+  
+.song-title {
+  padding: 2rem;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-color);
+}
+
+.controls {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background-color: var(--theme-color);
+  transition: width 0.2s linear;
+}
+
+.progress-container {
+  width: 90%;
+  height: 8px;
+  margin: 0 auto;
+  background: var(--track-bg, rgba(0, 0, 0, 0.1));
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-inset);  
+}
+
+.time {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  padding: 0.9rem;
+}
+
+.btn-prev,
+.btn-next,
+.btn-playpause {
+  margin-bottom: 20px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all color 0.3s ease;
+}
+
+.btn-prev,
+.btn-next {
+  margin-top: 4px;
+  width: 44px;
+  height: 44px;
+}
+
+.btn-playpause {
+  width: 54px;
+  height: 54px;
 }
 
 /* ===== Responsibilities Layout ===== */
@@ -495,12 +661,6 @@ body.light .profile-photo img {
   }
   .profile-socials i {
     font-size: 1.4rem;
-  }
-  .stat-box strong {
-    font-size: 1rem;
-  }
-  .stat-box span {
-    font-size: 0.75rem;
   }
   .setting-group label,
   .setting-group select {
@@ -558,30 +718,26 @@ body.light .profile-photo img {
   .profile-socials i {
     font-size: 1.5rem;
   }
-  .stat-box strong {
-    font-size: 1.3rem;
-  }
-  .stat-box span {
-    font-size: 1rem;
-  }
 }
 </style>
 </head>
-<body class="dark" data-theme-color="color-1" data-font="Georgia" oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
+<body class="light" data-theme-color="color-1" data-font="Georgia" oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
 
   <!-- Floating Settings -->
   <div class="floating-settings neumorphic">
-    <button id="settingsToggle" title="Settings"><i class="fas fa-gear rotating-gear"></i></button>
+    <button id="settingsToggle" title="Settings">
+      <i class="fas fa-gear rotating-gear"></i>
+    </button>
     <div class="settings-panel box-inset hidden" id="settingsPanel">
       <div class="setting-group">
-      <label>Color</label>
-      <div id="colorSelector" class="color-options">
-      <div class="color-swatch color-1" data-color="color-1"></div>
-      <div class="color-swatch color-2" data-color="color-2"></div>
-      <div class="color-swatch color-3" data-color="color-3"></div>
-      <div class="color-swatch color-4" data-color="color-4"></div>
-      <div class="color-swatch color-5" data-color="color-5"></div>
-      </div>
+        <label>Color</label>
+        <div id="colorSelector" class="color-options">
+          <div class="color-swatch color-1" data-color="color-1"></div>
+          <div class="color-swatch color-2" data-color="color-2"></div>
+          <div class="color-swatch color-3" data-color="color-3"></div>
+          <div class="color-swatch color-4" data-color="color-4"></div>
+          <div class="color-swatch color-5" data-color="color-5"></div>
+        </div>
       </div>
       <div class="setting-group">
         <label>Font</label>
@@ -598,127 +754,209 @@ body.light .profile-photo img {
       <div class="setting-group">
         <label>Theme</label>
         <select id="themeSelector">
+          <option value="light">Light</option>        
           <option value="dark">Dark</option>
-          <option value="light">Light</option>
         </select>
       </div>
     </div>
-   </div>
-   
+  </div>
+
   <!-- Preloader -->
   <div class="preloader" id="Preloader">
-  <div class="preload neumorphic" id="secretLoader" title="Secret Loader">
-    <i class="fas fa-music"></i>
-  </div>
+    <div class="preload neumorphic" id="secretLoader" title="Secret Loader">
+      <i class="fas fa-fingerprint"></i>
+    </div>
   </div>
 
   <!-- Profile Section -->
   <header class="profile-section">
     <div class="profile-photo neumorphic">
-     <a href="#" onclick="location.reload();">
-  <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="neumorphic">
-     </a>
+      <a href="#" onclick="location.reload();">
+        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="neumorphic">
+      </a>
     </div>
-      <!-- Social Media -->
-      <div class="profile-socials">
-        <a href="#"><i class="fab fa-youtube neumorphic"></i></a>
-        <a href="#"><i class="fab fa-instagram neumorphic"></i></a>
-        <a href="#"><i class="fab fa-telegram neumorphic"></i></a>
-        <a href="#"><i class="fas fa-envelope neumorphic"></i></a>
-      </div>
-    <div class="profile-info">      
+
+    <!-- Social Media -->
+    <div class="profile-socials">
+      <a href="https://youtube.com/@artkillers" target="_blank"><i class="fab fa-youtube neumorphic"></i></a>
+      <a href="https://instagram.com/artkillers._" target="_blank"><i class="fab fa-instagram neumorphic"></i></a>
+      <a href="https://t.me/+lGxEn6pLdDhhNmJl" target="_blank"><i class="fab fa-telegram neumorphic"></i></a>
+      <a href="mailto:artworkstreamofficial@gmail.com"><i class="fas fa-envelope neumorphic"></i></a>
+    </div>
+
+    <div class="profile-info">
       <div class="profile-name">
-        <h1>NEUMORPHIC</h1>
+        <h1>ART KILLERS</h1>
       </div>
-      
-      <div class="typed-text"><span id="typed"></span></div>               
-      
+      <div class="typed-text"><span id="typed"></span></div>
       <p class="profile-bio">
-      Celebrating the artistic and cultural heritage that has existed since ancient times, makes us really like challenges & learning new things in the rapid development of technology.
+        Celebrating the artistic and cultural heritage that has existed since ancient times,
+        makes us really like challenges & learning new things in the rapid development of technology,
+        as I believe that ongoing learning is key to progress.
       </p>
-      
-<section class="shop-section box-inout">
-  <i class="fas fa-shop" title="market"></i>
-  <h2>Online Store</h2>
 
-  <!-- Kategori Navigasi -->
-  <nav class="shop-categories">
-    <button class="neumorphic" data-category="clothes">Clothes</button>
-    <button class="neumorphic" data-category="trousers">Trousers</button>
-    <button class="neumorphic" data-category="accessories">Accessories</button>
-  </nav>
-
-  <!-- Wrapper Scroll Horizontal -->
-  <div class="scroll-wrapper box-inset">
-    <div class="scroll-container" id="productScroll">
-      <!-- CLOTHES -->
-      <div class="product-item" data-category="clothes">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
-        <h3>Clothes A</h3>
-        <p>IDR 50K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>
-      <div class="product-item" data-category="clothes">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
-        <h3>Clothes B</h3>
-        <p>IDR 50K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>
-
-      <!-- TROUSERS -->
-      <div class="product-item" data-category="trousers">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
-        <h3>Trousers A</h3>
-        <p>IDR 100K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>
-      <div class="product-item" data-category="trousers">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
-        <h3>Trousers B</h3>
-        <p>IDR 50K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>
-
-      <!-- ACCESSORIES -->
-      <div class="product-item" data-category="accessories">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
-        <h3>Shoes</h3>
-        <p>IDR 150K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>    
-      <div class="product-item" data-category="accessories">
-        <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
-        <h3>Watches</h3>
-        <p>IDR 50K</p>
-        <a href="#" class="order-btn neumorphic">Order</a>
-      </div>
-    </div>
-  </div>
-    <div class="scroll-buttons">
-      <button id="prevBtn" class="neumorphic" onclick="scrollLeft()">←</button>
-      <button id="nextBtn" class="neumorphic" onclick="scrollRight()">→</button>
-    </div>
-</section>
-      
       <!-- Daily Routine Icons -->
-      <div class="daily-routine box-inout">
-      <div class="routine-icons">
-        <i class="fas fa-bed box-inset" title="sleep"></i>
-        <i class="fas fa-shower box-inset" title="bathe"></i>
-        <i class="fas fa-utensils box-inset" title="food"></i>
-        <i class="fas fa-gamepad box-inset" title="game"></i>
-        <i class="fas fa-redo-alt box-inset" title="repeat"></i>
-      </div>
-      <p class="routine-quote">
-      All these activities are considered legitimate because they fall under the "rules" or principles of individual freedom and expression, and are symbolically or culturally protected by the community or society in the "scene".
-      </p>
-      </div>
+      <section class="music-section box-inout">
+        <div class="daily-routine">
+          <div class="routine-icons">
+            <i class="fas fa-bed box-inset" title="sleep"></i>
+            <i class="fas fa-shower box-inset" title="bathe"></i>
+            <i class="fas fa-utensils box-inset" title="food"></i>
+            <i class="fas fa-gamepad box-inset" title="game"></i>
+            <i class="fas fa-redo-alt box-inset" title="repeat"></i>
+          </div>
+          <p class="routine-quote">
+            All these activities are considered legitimate because they fall under the "rules" or principles
+            of individual freedom and expression, and are symbolically or culturally protected by the community
+            or society in the "scene".
+          </p>
+        </div>
 
-  <!-- Footer -->
-  <footer class="neumorphic">
-  <a href="https://artkillers.github.io">© Art Killers • All Rights Reserved.</a>
-  </footer>
-  </div>
+        <div class="music box-inset">
+          <div id="songTitle" class="song-title"> • • • </div>
+          <div class="controls">
+            <button class="btn-prev neumorphic" id="btnPrev" title="Previous Song">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button class="btn-playpause neumorphic" id="btnPlayPause" title="Play/Pause">
+              <i class="fas fa-play" id="iconPlay"></i>
+              <i class="fas fa-pause" id="iconPause" style="display:none;"></i>
+            </button>
+            <button class="btn-next neumorphic" id="btnNext" title="Next Song">
+              <i class="fas fa-forward"></i>
+            </button>
+          </div>
+
+          <div class="progress-container box-inset" id="progressContainer">
+            <div class="progress" id="progress"></div>
+          </div>
+
+          <div class="time">
+            <span id="currentTime">00:00</span>
+            <span id="duration">00:00</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shop Section -->
+      <section class="shop-section box-inout">
+        <i class="fas fa-shop" title="market"></i>
+        <h2>Online Store</h2>
+
+        <!-- Kategori Navigasi -->
+        <nav class="shop-categories">
+          <button class="neumorphic" data-category="clothes">Clothes</button>
+          <button class="neumorphic" data-category="trousers">Trousers</button>
+          <button class="neumorphic" data-category="accessories">Accessories</button>
+        </nav>
+
+        <!-- Produk -->
+        <div class="scroll-wrapper box-inset">
+          <div class="scroll-container" id="productScroll">
+
+            <!-- CLOTHES -->
+            <div class="product-item" data-category="clothes">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+              <h3>Clothes A</h3>
+              <p>IDR 100.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="clothes">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+              <h3>Clothes B</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="clothes">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+              <h3>Clothes C</h3>
+              <p>IDR 100.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="clothes">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="clothes">
+              <h3>Clothes D</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+
+            <!-- TROUSERS -->
+            <div class="product-item" data-category="trousers">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+              <h3>Trousers A</h3>
+              <p>IDR 100.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="trousers">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+              <h3>Trousers B</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="trousers">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+              <h3>Trousers C</h3>
+              <p>IDR 100.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="trousers">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="trousers">
+              <h3>Trousers D</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+
+            <!-- ACCESSORIES -->
+            <div class="product-item" data-category="accessories">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+              <h3>Shoes</h3>
+              <p>IDR 150.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="accessories">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+              <h3>Watches</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="accessories">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+              <h3>Necklace</h3>
+              <p>IDR 150.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+            <div class="product-item" data-category="accessories">
+              <img src="https://i.ibb.co/LzNVt1Dn/neumorphic.png" alt="accessories">
+              <h3>Finger Ring</h3>
+              <p>IDR 50.000</p>
+              <a href="#" class="order-btn neumorphic add-to-cart-btn">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="scroll-buttons">
+          <button id="prevBtn" class="neumorphic" onclick="scrollLeft()">←</button>
+          <button id="nextBtn" class="neumorphic" onclick="scrollRight()">→</button>
+        </div>
+
+        <!-- Keranjang Belanja -->
+        <div class="cart-scroll box-inset">
+          <ul id="cart-list"></ul>
+          <p id="empty-cart">" your cart is empty "</p>
+        </div>
+        <p id="cart-total">Total : IDR 0</p>
+        <div class="cart-actions">
+          <a id="whatsapp-link" href="#" class="neumorphic" target="_blank" style="display: inline-block;">Order via WhatsApp</a>
+          <button id="clear-cart" class="neumorphic">Cancel All</button>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="neumorphic">
+        <a href="https://artkillers.github.io">© Art Killers • All Rights Reserved.</a>
+      </footer>
+
+    </div> <!-- End .profile-info -->
   </header>
     
 <audio id="audio" preload="metadata"></audio>
@@ -726,56 +964,211 @@ body.light .profile-photo img {
 <script>
   const scrollBox = document.getElementById('productScroll');
   const allItems = Array.from(document.querySelectorAll('.product-item'));
-  const categoryButtons = document.querySelectorAll('.shop-categories button');
+  const buttons = document.querySelectorAll('.shop-categories button');
+  const cartList = document.getElementById('cart-list');
+  const emptyCartMsg = document.getElementById('empty-cart');
+  const cartTotal = document.getElementById('cart-total');
+  const whatsappLink = document.getElementById('whatsapp-link');
+  const clearCartBtn = document.getElementById('clear-cart');
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
   let currentCategory = 'clothes';
-  let currentPage = 0;
-  const itemsPerPage = 1;
+  let currentIndex = 0;
 
-  function renderItems() {
+  // Menampilkan satu produk per kali sesuai kategori
+  function showCurrentItem() {
     const filtered = allItems.filter(item => item.dataset.category === currentCategory);
-
-    scrollBox.innerHTML = '';
-
-    const start = currentPage * itemsPerPage;
-    const end = start + itemsPerPage;
-
-    filtered.slice(start, end).forEach(item => {
-      scrollBox.appendChild(item);
-    });
-
-    document.getElementById('prevBtn').disabled = currentPage === 0;
-    document.getElementById('nextBtn').disabled = end >= filtered.length;
+    allItems.forEach(item => item.style.display = 'none');
+    if (filtered[currentIndex]) {
+      filtered[currentIndex].style.display = 'flex';
+    }
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= filtered.length - 1;
   }
 
-  categoryButtons.forEach(btn => {
+  // Navigasi Kategori
+  buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       currentCategory = btn.dataset.category;
-      currentPage = 0;
-      renderItems();
+      currentIndex = 0;
+      showCurrentItem();
     });
   });
 
-  document.getElementById('prevBtn').addEventListener('click', () => {
-    if (currentPage > 0) {
-      currentPage--;
-      renderItems();
+  // Tombol ← dan →
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      showCurrentItem();
     }
   });
 
-  document.getElementById('nextBtn').addEventListener('click', () => {
+  nextBtn.addEventListener('click', () => {
     const filtered = allItems.filter(item => item.dataset.category === currentCategory);
-    if ((currentPage + 1) * itemsPerPage < filtered.length) {
-      currentPage++;
-      renderItems();
+    if (currentIndex < filtered.length - 1) {
+      currentIndex++;
+      showCurrentItem();
     }
   });
 
+  // Inisialisasi saat pertama kali load
   window.addEventListener('DOMContentLoaded', () => {
-    renderItems();
+    showCurrentItem();
+  });
+
+  // Fungsi Update Keranjang dan WhatsApp
+  function updateCart() {
+    const cartItems = cartList.querySelectorAll('li');
+    let total = 0;
+    const orderText = [];
+
+    cartItems.forEach(item => {
+      const name = item.getAttribute('data-name');
+      const price = parseInt(item.getAttribute('data-price'));
+      total += price;
+      orderText.push(`- ${name} (IDR ${price.toLocaleString('id-ID')})`);
+    });
+
+    cartTotal.textContent = `Total : IDR ${total.toLocaleString('id-ID')}`;
+    emptyCartMsg.style.display = cartItems.length ? 'none' : 'block';
+
+    if (cartItems.length > 0) {
+      const message = encodeURIComponent(`Halo, saya ingin memesan :\n\n${orderText.join('\n')}\n\nTotal : IDR ${total.toLocaleString('id-ID')}`);
+      whatsappLink.href = `https://wa.me/6285823385257?text=${message}`;
+      whatsappLink.style.display = 'inline-block';
+    } else {
+      whatsappLink.style.display = 'inline-block';
+    }
+  }
+
+  // Fungsi Tambah ke Keranjang
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const product = btn.closest('.product-item');
+      const name = product.querySelector('h3').textContent;
+      const price = parseInt(product.querySelector('p').textContent.replace(/\D/g, ''));
+
+      const li = document.createElement('li');
+      li.setAttribute('data-name', name);
+      li.setAttribute('data-price', price);
+      li.innerHTML = `${name} - IDR ${price.toLocaleString('id-ID')} <button class="remove-btn neumorphic">Cancel</button>`;
+
+      // Tombol cancel item
+      li.querySelector('.remove-btn').addEventListener('click', () => {
+        li.remove();
+        updateCart();
+      });
+
+      cartList.appendChild(li);
+      updateCart();
+    });
+  });
+
+  // Tombol Cancel Semua
+  clearCartBtn.addEventListener('click', () => {
+    cartList.innerHTML = '';
+    updateCart();
   });
 </script>
 <script>
+const songs = [
+  { title: "Karl Marx - Chill Vibes", src: "neumorphic-01.mp3" },
+  { title: "Nietzsche - Night Drive", src: "neumorphic-02.mp3" },
+  { title: "Plato - Mood Swing", src: "neumorphic-03.mp3" },
+  { title: "Aristoteles - Last Day", src: "neumorphic-04.mp3" }
+];
+
+let currentSongIndex = 0;
+
+const audio = new Audio();
+const playBtn = document.getElementById("btnPlayPause");
+const iconPlay = document.getElementById("iconPlay");
+const iconPause = document.getElementById("iconPause");
+const btnPrev = document.getElementById("btnPrev");
+const btnNext = document.getElementById("btnNext");
+const songTitle = document.getElementById("songTitle");
+const progress = document.getElementById("progress");
+const progressContainer = document.getElementById("progressContainer");
+const currentTimeEl = document.getElementById("currentTime");
+const durationEl = document.getElementById("duration");
+
+function loadSong(index) {
+  const song = songs[index];
+  audio.src = song.src;
+  songTitle.textContent = song.title;
+  audio.load();
+}
+
+function togglePlayPause() {
+  if (audio.paused) {
+    audio.play();
+    iconPlay.style.display = "none";
+    iconPause.style.display = "inline";
+  } else {
+    audio.pause();
+    iconPlay.style.display = "inline";
+    iconPause.style.display = "none";
+  }
+}
+
+function prevSong() {
+  currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+  loadSong(currentSongIndex);
+  audio.play();
+  togglePlayPauseIcons(true);
+}
+
+function nextSong() {
+  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  loadSong(currentSongIndex);
+  audio.play();
+  togglePlayPauseIcons(true);
+}
+
+function togglePlayPauseIcons(isPlaying) {
+  iconPlay.style.display = isPlaying ? "none" : "inline";
+  iconPause.style.display = isPlaying ? "inline" : "none";
+}
+
+// Update progress bar
+audio.addEventListener("timeupdate", () => {
+  const { currentTime, duration } = audio;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+
+  // Time formatting
+  currentTimeEl.textContent = formatTime(currentTime);
+  durationEl.textContent = formatTime(duration);
+});
+
+progressContainer.addEventListener("click", (e) => {
+  const width = progressContainer.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+
+  audio.currentTime = (clickX / width) * duration;
+});
+
+function formatTime(time) {
+  if (isNaN(time)) return "00:00";
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+}
+
+audio.addEventListener("ended", nextSong);
+
+// Init
+loadSong(currentSongIndex);
+
+// Events
+playBtn.addEventListener("click", togglePlayPause);
+btnPrev.addEventListener("click", prevSong);
+btnNext.addEventListener("click", nextSong);
+
 // Toggle Panel Settings
 const settingsToggle = document.getElementById("settingsToggle");
 const settingsPanel = document.getElementById("settingsPanel");
@@ -832,12 +1225,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("Preloader");
   const secretLoader = document.getElementById("secretLoader");
 
+  // Klik untuk langsung buka
   secretLoader.addEventListener("click", () => {
     preloader.style.opacity = "0";
-    document.body.classList.remove("loading"); // aktifkan scroll
     setTimeout(() => {
       preloader.style.display = "none";
-    }, 300);
+    }, 300); // tunggu animasi fade-out
   });
 });
 
