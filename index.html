@@ -323,13 +323,12 @@ body.light .profile-photo img {
 } 
 
 /* === CSS for About Tabs === */
-/* About Tabs */
+  
 .about-tabs {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+  justify-items: center;
 }
 
 .tab-item {
@@ -337,6 +336,7 @@ body.light .profile-photo img {
   gap: 10px;
   padding: 15px 20px;
   margin-top: 30px;
+  margin-bottom: 25px;
   border-radius: var(--radius);
   font-size: 10px;
   font-weight: bold;
@@ -363,10 +363,9 @@ body.light .profile-photo img {
 }
 
 .timeline-item {
-  width: 70%;
-  max-width: 100px;
-  min-height: 100px;
-  padding: 10px;
+  width: 70px; 
+  gap: 10px;
+  padding: 15px 20px;
   margin-bottom: 30px;
   border-radius: var(--radius);
   text-align: center;  
@@ -378,8 +377,9 @@ body.light .profile-photo img {
 
 /* Icon */
 .timeline-item .icon {
-  font-size: 15px;
+  font-size: 20px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Texts */
@@ -857,10 +857,10 @@ body.light .profile-photo img {
 
     <!-- Social Media -->
     <div class="profile-socials">
-      <a href="https://youtube.com/@artkillers" target="_blank"><i class="fab fa-youtube neumorphic"></i></a>
-      <a href="https://instagram.com/artkillers._" target="_blank"><i class="fab fa-instagram neumorphic"></i></a>
-      <a href="https://t.me/+lGxEn6pLdDhhNmJl" target="_blank"><i class="fab fa-telegram neumorphic"></i></a>
-      <a href="mailto:artworkstreamofficial@gmail.com"><i class="fas fa-envelope neumorphic"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-youtube neumorphic"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-instagram neumorphic"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-telegram neumorphic"></i></a>
+      <a href="#"><i class="fas fa-envelope neumorphic"></i></a>
     </div>
 
     <div class="profile-info">
@@ -885,19 +885,19 @@ body.light .profile-photo img {
 <!-- Skills Start -->  
 <div class="tab-content skills active">  
   <div class="timeline">  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-lightbulb icon"></i>  
-      <span>taught</span>  
+      <span>selftaught</span>  
       <h3>Branding</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-bullhorn icon"></i>  
-      <span>taught</span>  
+      <span>selftaught</span>  
       <h3>Marketing</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-code icon"></i>  
-      <span>taught</span>  
+      <span>selftaught</span>  
       <h3>Programming</h3>  
     </div>  
   </div>  
@@ -907,17 +907,17 @@ body.light .profile-photo img {
 <!-- Experience Start -->  
 <div class="tab-content experience">  
   <div class="timeline">  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-video icon"></i>  
       <span>Freelance</span>  
       <h3>Editing</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-paint-brush icon"></i>  
       <span>Freelance</span>  
       <h3>Creator</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-cogs icon"></i>  
       <span>Freelance</span>  
       <h3>Technician</h3>  
@@ -929,17 +929,17 @@ body.light .profile-photo img {
 <!-- Education Start -->  
 <div class="tab-content education">  
   <div class="timeline">  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-graduation-cap icon"></i>  
       <span>Informal</span>  
       <h3>Elementary</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-graduation-cap icon"></i>  
       <span>Informal</span>  
       <h3>Middle</h3>  
     </div>  
-    <div class="timeline-item box-inout">  
+    <div class="timeline-item box-inset">  
       <i class="fas fa-graduation-cap icon"></i>  
       <span>Informal</span>  
       <h3>Vocational</h3>  
@@ -1191,7 +1191,7 @@ body.light .profile-photo img {
 
     if (cartItems.length > 0) {
       const message = encodeURIComponent(`Halo, saya ingin memesan :\n\n${orderText.join('\n')}\n\nTotal : IDR ${total.toLocaleString('id-ID')}`);
-      whatsappLink.href = `https://wa.me/6285823385257?text=${message}`;
+      whatsappLink.href = `https://wa.me/+15555555555?text=${message}`;
       whatsappLink.style.display = 'inline-block';
     } else {
       whatsappLink.style.display = 'inline-block';
