@@ -10,95 +10,130 @@
 /* ===== Global Base ===== */
 
 :root {
-  --color-1: #6c5ce7;
-  --color-2: #00cec9;
-  --color-3: #fd79a8;
-  --color-4: #e17055;
-  --color-5: #0984e3;
+  --color-1: #fd79a8; 
+  --color-2: #6c5ce7; 
+  --color-3: #000; 
+  --color-4: #555;
+  --color-5: #fff;
 
-  --theme-color: var(--color-1);
-  --font-main: 'Georgia', sans-serif;
+--theme-color: var(--color-5);
+--font-main: 'Georgia', sans-serif;
 
-  --bg-light: #e0e0e0;
-  --bg-dark: #1e1e1e;
-  --text-light: #1e1e1e;
-  --text-dark: #e0e0e0;
-  --radius: 12px;
-  --shadow-inset-light: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-  --shadow-inset-dark: inset 6px 6px 12px #141414, inset -6px -6px 12px #2c2c2c;
-  --shadow-out-light: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
-  --shadow-out-dark: 6px 6px 12px #141414, -6px -6px 12px #2c2c2c;
+--accent-gradient-light: linear-gradient(125deg, #6c5ce7, #9e2f8e);
+--accent-gradient-dark: linear-gradient(125deg, #7a1b45, #6a4c93);
+  
+  --shadow-inset-light: inset 4px 4px 8px rgba(0,0,0,0.5), 
+                      inset -4px -4px 8px rgba(255,255,255,0.3);
+  --shadow-out-light: 4px 4px 8px rgba(0,0,0,0.4),
+                    -4px -4px 8px rgba(255,255,255,0.2);
+  
+  --shadow-inset-dark: inset 4px 4px 8px rgba(0,0,0,0.4), 
+                      inset -4px -4px 8px rgba(255,255,255,0.2);
+  --shadow-out-dark: 4px 4px 8px rgba(0,0,0,0.3),
+                     -4px -4px 8px rgba(255,255,255,0.1);
+  
+  --glass-light: rgba(255, 255, 255, 0.15);
+  --glass-dark: rgba(30, 30, 30, 0.25);
+  --border: blur(5px);
+  --blur: blur(10px);
+  --radius: 14px;
 }
 
 * {
-  -webkit-tap-highlight-color: transparent; 
-  -webkit-user-select: none; 
+  margin: 0;
+  padding: 0;
   user-select: none;
+  -webkit-user-select: none; 
+  -webkit-tap-highlight-color: transparent; 
 }
 
 html {
+  position: relative;
+  overflow-x: hidden;  
   scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  padding: 0;
+  font-size: 1rem;
   font-family: var(--font-main);
-  color: var(--theme-color);
-  background-color: var(--bg-dark);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  color: var(--theme-color); 
   transition: all color 0.3s ease;
 }
 
-body.light {
-  background-color: var(--bg-light);
+body {
+  background: var(--accent-gradient-light); 
   color: var(--theme-color);
+  background-size: 100%;
+  padding: 1rem;
+}
+
+body.dark {
+  background: var(--accent-gradient-dark); 
+}
+
+section {
+  margin: 1rem auto;
+  padding: 1rem;  
 }
 
 /* ===== Neumorphic Section ===== */
 .neumorphic {
   border-radius: var(--radius);
+  color: var(--theme-color);
+  border: 2px solid var(--border);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
   transition: all color 0.3s ease;
 }
+
 body.light .neumorphic {
-  background: var(--bg-light);
+  background: var(--accent-gradient-light);
   box-shadow: var(--shadow-out-light);
 }
+
 body.dark .neumorphic {
-  background: var(--bg-dark);
+  background: var(--accent-gradient-dark);
   box-shadow: var(--shadow-out-dark);
 }
 
-body.dark .neumorphic:active {
-  box-shadow: var(--shadow-inset-dark);
-}
 body.light .neumorphic:active {
   box-shadow: var(--shadow-inset-light);
 }
-
-.box-inout {
-  border-radius: var(--radius);
-  background: var(--bg-light); 
-  box-shadow: var(--shadow-out-light); 
-  transition: all color 0.3s ease;
+body.dark .neumorphic:active {
+  box-shadow: var(--shadow-inset-dark);
 }
+
+/* ===== Box Layouts ===== */
+.box-inout {
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  transition: all color 0.3s ease;
+  color: var(--theme-color); /* Tambahan penting */
+}
+
+body.light .box-inout {
+  background: var(--accent-gradient-light);
+  box-shadow: var(--shadow-out-light);
+}
+
 body.dark .box-inout {
-  background: var(--bg-dark);
+  background: var(--accent-gradient-dark);
   box-shadow: var(--shadow-out-dark);
 }
 
 .box-inset {
+  border: 2px solid var(--border);
   border-radius: var(--radius);
-  background: var(--bg-light);
-  box-shadow: var(--shadow-inset-light);
   transition: all color 0.3s ease;
-}
-body.dark .box-inset {
-  background: var(--bg-dark);
-  box-shadow: var(--shadow-inset-dark);
+  color: var(--theme-color); /* Tambahan penting */
 }
 
+body.light .box-inset {
+  background: var(--accent-gradient-light);
+  box-shadow: var(--shadow-inset-light);
+}
+
+body.dark .box-inset {
+  background: var(--accent-gradient-dark);
+  box-shadow: var(--shadow-inset-dark);
+}
 /* ===== Floating Section ===== */
 .floating-settings {
   position: fixed;
@@ -106,13 +141,14 @@ body.dark .box-inset {
   right: 30px;
   z-index: 1000;
   padding: 12px;
-  border-radius: var(--radius);
 }
 
 .floating-settings button {
   font-size: 1.2rem;
   background: none;
-  border: none;
+  outline: none;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
   color: var(--theme-color);
   cursor: pointer;
 }
@@ -143,7 +179,7 @@ body.dark .box-inset {
   width: 100%;
   padding: 6px;
   border-radius: var(--radius);
-  border: none;
+  border: 2px solid var(--border);
   background: transparent;
   color: var(--theme-color);
   font-family: var(--font-main);
@@ -159,7 +195,7 @@ body.dark .box-inset {
   width: 25px;
   height: 25px;
   border-radius: var(--radius);
-  border: 2px solid var(--bg-dark);
+  border: 2px solid var(--border);
   cursor: pointer;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
@@ -194,7 +230,7 @@ body.dark .box-inset {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg-dark);
+  background: var(--accent-gradient-dark);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -220,7 +256,7 @@ body.dark .box-inset {
 }
 
 body.light .preloader {
-  background: var(--bg-light);
+  background: var(--accent-gradient-light);
 }
 
 /* ===== Elemen Section ===== */
@@ -257,35 +293,29 @@ footer a {
 }
 
 .profile-photo {
-  width: 120px; /* atau sesuai kebutuhan */
-  height: 120px;
+  height: 100%;
   border-radius: var(--radius);
   overflow: hidden;
-  padding: 3px; /* kasih ruang untuk efek shadow */
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 70px;
+  margin-top: 100px;
 }
 
 .profile-photo img {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
+  max-height: 100px;
+  max-width: 100px;
   object-fit: cover;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: 0 0 12px var(--theme-color);
-}
-
-body.light .profile-photo img {
-  box-shadow: 0 0 12px var(--theme-color);
 }
 
 .profile-name h1 {
   text-align: center;
   margin: 20px 0 5px;
-  font-size: 3rem;
+  font-size: 2rem;
   color: var(--theme-color);
 }
 
@@ -296,7 +326,7 @@ body.light .profile-photo img {
   padding: 15px;
   text-align: center;
   max-width: 1000px;
-  font-size: 0.7rem;
+  font-size: 10px;
   color: var(--theme-color);
 }
 
@@ -319,31 +349,27 @@ body.light .profile-photo img {
   font-size: 1rem;
   transition: all color 0.3s ease;
   outline: none;
-  border: none;
+  border: 2px solid var(--border);
 } 
 
 /* === CSS for About Tabs === */
   
 .about-tabs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+  margin: 0 auto 25px;
 }
 
 .tab-item {
-  width: 70px; 
-  gap: 10px;
-  padding: 15px 20px;
-  margin-top: 30px;
-  margin-bottom: 25px;
-  border-radius: var(--radius);
-  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  cursor: pointer;
-  color: var(--theme-color);
-  transition: all color 0.3s ease;
-  text-align: center;
+  font-size: 10px;
+  margin-top: 25px;
+  height: 40px;
 }
 
 /* Tab Content */
@@ -354,44 +380,33 @@ body.light .profile-photo img {
   display: block;
 }
 
-/* Timeline Layout */
 .timeline {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .timeline-item {
-  width: 70px; 
-  gap: 10px;
-  padding: 15px 20px;
-  margin-bottom: 30px;
-  border-radius: var(--radius);
-  text-align: center;  
-  color: var(--theme-color);
+  padding: 1rem 1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Icon */
 .timeline-item .icon {
   font-size: 20px;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
 
-/* Texts */
 .timeline-item span {
   font-size: 10px;
-  margin-bottom: 5px;
   color: var(--theme-color);
 }
+
 .timeline-item h3 {
   font-size: 10px;
   font-weight: bold;
 }
+
 .timeline-item h4 {
   font-size: 10px;
   font-weight: normal;
@@ -410,11 +425,19 @@ body.light .profile-photo img {
 }
 
 .shop-section i {
-  font-size: 40px;
+  margin-bottom: 20px;
+  font-size: 2rem;
   text-align: center;
 }
+.shop-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .shop-section h3 {
-  font-size: 20px;
+  font-size: 1rem;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -429,8 +452,9 @@ body.light .profile-photo img {
 }
 
 .shop-categories button {
-  border: none;
+  border: 2px solid var(--border);
   padding: 10px 15px;
+  margin-top: 20px;
   border-radius: var(--radius);
   cursor: pointer;
   font-family: var(--font-main); 
@@ -468,18 +492,15 @@ body.light .profile-photo img {
 .product-item img {
   width: 70%;
   border-radius: var(--radius);
-  margin-bottom: 10px;
-  box-shadow: 0 0 12px var(--theme-color);
-}
-
-body.light .profile-photo img {
-  box-shadow: 0 0 12px var(--theme-color);
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
 }
 
 /* Tombol Order */
 .order-btn {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 10px 15px;
   color: var(--theme-color);
   border-radius: var(--radius);
@@ -498,7 +519,7 @@ body.light .profile-photo img {
 
 .scroll-buttons button {
   padding: 10px 15px;
-  border: none;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   font-size: 15px;
   color: var(--theme-color);
@@ -549,13 +570,13 @@ body.light .profile-photo img {
 
 /* Tombol Cancel */
 .remove-btn {
-  border: none;
+  border: 2px solid var(--border);
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 8px 8px;
   color: var(--theme-color);
   font-size: 10px;
-  cursor: pointer
+  cursor: pointer;
   flex-shrink: 0; 
 }
 
@@ -596,7 +617,7 @@ body.light .profile-photo img {
 }
   
 #clear-cart {
-  border: none;
+  border: 2px solid var(--border);
   outline: none;
 }
 
@@ -697,7 +718,7 @@ body.light .profile-photo img {
 .btn-playpause {
   margin-bottom: 20px;
   background: transparent;
-  border: none;
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   color: inherit;
   cursor: pointer;
@@ -719,83 +740,6 @@ body.light .profile-photo img {
 .btn-playpause {
   width: 54px;
   height: 54px;
-}
-
-/* ===== Responsibilities Layout ===== */
-
-@media (max-width: 680px) {
-  body { 
-    padding: 1rem;
-  }
-  .profile-photo img {
-    width: 90px;
-    height: 90px;
-  }
-  .profile-name h1 {
-    font-size: 2rem;
-  }
-  .profile-bio {
-    font-size: 0.7rem;
-  }
-  .profile-socials i {
-    font-size: 1.4rem;
-  }
-  .setting-group label,
-  .setting-group select {
-    font-size: 0.85rem;
-  }
-  .floating-settings button {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 681px) {
-  body { 
-    padding: 2rem;
-  }
-  .floating-settings {
-    position: fixed;
-    top: 90px;
-    right: 70px;
-    z-index: 1000;
-    padding: 12px;
-    border-radius: var(--radius);
-  }
-  .profile-section {
-    padding: 40px 40px;
-  }
-  .profile-photo {
-    width: 160px; /* atau sesuai kebutuhan */
-    height: 160px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    padding: 20px; /* kasih ruang untuk efek shadow */
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    margin-bottom: 20px;
-  }
-  .profile-photo img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: var(--radius);
-    box-shadow: 0 0 12px var(--theme-color);
-  }
-  body.light .profile-photo img {
-    box-shadow: 0 0 12px var(--theme-color);
-  }
-  .profile-name h1 {
-    font-size: 3.5rem;
-  }
-  .profile-bio {
-    font-size: 1.05rem;
-    max-width: 600px;
-  }
-  .profile-socials i {
-    font-size: 1.5rem;
-  }
 }
 </style>
 </head>
@@ -881,24 +825,23 @@ body.light .profile-photo img {
     <span class="tab-item neumorphic" data-target=".education">Education</span>
   </div>
 
-<!-- Skills Start -->
 <!-- Skills Start -->  
 <div class="tab-content skills active">  
   <div class="timeline">  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-lightbulb icon"></i>  
-      <span>selftaught</span>  
-      <h3>Branding</h3>  
+      <i class="fas fa-object-group icon"></i>  
+      <span>Self-Taught</span>  
+      <h3>Designer & Development</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-bullhorn icon"></i>  
-      <span>selftaught</span>  
-      <h3>Marketing</h3>  
+      <i class="fas fa-screwdriver-wrench icon"></i>  
+      <span>Self-Taught</span>  
+      <h3>Repair & Maintenance</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-code icon"></i>  
-      <span>selftaught</span>  
-      <h3>Programming</h3>  
+      <i class="fas fa-terminal icon"></i>  
+      <span>Self-Taught</span>  
+      <h3>Code Programmer</h3>  
     </div>  
   </div>  
 </div>  
@@ -908,19 +851,19 @@ body.light .profile-photo img {
 <div class="tab-content experience">  
   <div class="timeline">  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-video icon"></i>  
+      <i class="fas fa-chart-line icon"></i>  
       <span>Freelance</span>  
-      <h3>Editing</h3>  
+      <h3>Digital Marketing SEO</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-paint-brush icon"></i>  
-      <span>Freelance</span>  
-      <h3>Creator</h3>  
+      <i class="fas fa-user-edit icon"></i>  
+      <span>Volunteer</span>  
+      <h3>Personal Branding & Storytelling</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-cogs icon"></i>  
-      <span>Freelance</span>  
-      <h3>Technician</h3>  
+      <i class="fas fa-laptop-code icon"></i>  
+      <span>Self Projects</span>  
+      <h3>UI/UX Designer & Web Developer</h3>  
     </div>  
   </div>  
 </div>  
@@ -932,17 +875,17 @@ body.light .profile-photo img {
     <div class="timeline-item box-inset">  
       <i class="fas fa-graduation-cap icon"></i>  
       <span>Informal</span>  
-      <h3>Elementary</h3>  
+      <h3>Vocational High School</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-graduation-cap icon"></i>  
+      <i class="fas fa-certificate icon"></i>  
       <span>Informal</span>  
-      <h3>Middle</h3>  
+      <h3>Middle School</h3>  
     </div>  
     <div class="timeline-item box-inset">  
-      <i class="fas fa-graduation-cap icon"></i>  
+      <i class="fas fa-book icon"></i>  
       <span>Informal</span>  
-      <h3>Vocational</h3>  
+      <h3>Elementary School</h3>  
     </div>  
   </div>  
 </div>  
