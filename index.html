@@ -10,17 +10,19 @@
 /* ===== Global Base ===== */
 
 :root {
-  --color-1: #fd79a8; 
-  --color-2: #6c5ce7; 
-  --color-3: #000; 
-  --color-4: #555;
-  --color-5: #fff;
+  --color-1: #ffa6fe;
+  --color-2: #e2a6ff;
+  --color-3: #d9b4e5;
+  --color-4: #c8a2c8;
+  --color-5: #d9b4e5;
 
---theme-color: var(--color-5);
---font-main: 'Georgia', sans-serif;
-
---accent-gradient-light: linear-gradient(125deg, #6c5ce7, #9e2f8e);
---accent-gradient-dark: linear-gradient(125deg, #7a1b45, #6a4c93);
+  --theme-color: var(--color-1);
+  --font-main: 'Georgia', sans-serif;
+  --border: -4px -4px 8px rgba(255,255,255, 0.01);
+  --radius: 14px;
+ 
+  --accent-gradient-light: linear-gradient(125deg, #6c5ce7, #ff69b4);
+  --accent-gradient-dark: linear-gradient(125deg, #2a1e6e, #8e2e5f);
   
   --shadow-inset-light: inset 4px 4px 8px rgba(0,0,0,0.5), 
                       inset -4px -4px 8px rgba(255,255,255,0.3);
@@ -31,12 +33,6 @@
                       inset -4px -4px 8px rgba(255,255,255,0.2);
   --shadow-out-dark: 4px 4px 8px rgba(0,0,0,0.3),
                      -4px -4px 8px rgba(255,255,255,0.1);
-  
-  --glass-light: rgba(255, 255, 255, 0.15);
-  --glass-dark: rgba(30, 30, 30, 0.25);
-  --border: blur(5px);
-  --blur: blur(10px);
-  --radius: 14px;
 }
 
 * {
@@ -53,15 +49,16 @@ html {
   scroll-behavior: smooth;
   font-size: 1rem;
   font-family: var(--font-main);
-  color: var(--theme-color); 
-  transition: all color 0.3s ease;
+  color: var(--theme-color);   
 }
 
 body {
+  position: relative;
   background: var(--accent-gradient-light); 
   color: var(--theme-color);
   background-size: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
+  transition: all color 0.3s ease;
 }
 
 body.dark {
@@ -69,17 +66,16 @@ body.dark {
 }
 
 section {
+  position: relative;
   margin: 1rem auto;
   padding: 1rem;  
+  transition: all color 0.3s ease;
 }
 
 /* ===== Neumorphic Section ===== */
 .neumorphic {
   border-radius: var(--radius);
-  color: var(--theme-color);
-  border: 2px solid var(--border);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
   transition: all color 0.3s ease;
 }
 
@@ -102,10 +98,9 @@ body.dark .neumorphic:active {
 
 /* ===== Box Layouts ===== */
 .box-inout {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all color 0.3s ease;
-  color: var(--theme-color); /* Tambahan penting */
 }
 
 body.light .box-inout {
@@ -119,10 +114,9 @@ body.dark .box-inout {
 }
 
 .box-inset {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all color 0.3s ease;
-  color: var(--theme-color); /* Tambahan penting */
 }
 
 body.light .box-inset {
@@ -137,8 +131,8 @@ body.dark .box-inset {
 /* ===== Floating Section ===== */
 .floating-settings {
   position: fixed;
-  top: 50px;
-  right: 30px;
+  top: 55px;
+  right: 40px;
   z-index: 1000;
   padding: 12px;
 }
@@ -147,7 +141,7 @@ body.dark .box-inset {
   font-size: 1.2rem;
   background: none;
   outline: none;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--theme-color);
   cursor: pointer;
@@ -179,7 +173,7 @@ body.dark .box-inset {
   width: 100%;
   padding: 6px;
   border-radius: var(--radius);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   background: transparent;
   color: var(--theme-color);
   font-family: var(--font-main);
@@ -195,7 +189,7 @@ body.dark .box-inset {
   width: 25px;
   height: 25px;
   border-radius: var(--radius);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   cursor: pointer;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
@@ -230,33 +224,35 @@ body.dark .box-inset {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--accent-gradient-dark);
+  background: var(--accent-gradient-light);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 99999;
-  transition: all color 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+body.dark .preloader {
+  background: var(--accent-gradient-dark);
 }
 
 .preload {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
+  font-size: 35px;
+  color: var(--theme-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  color: var(--theme-color);
   border-radius: var(--radius);
 }
 
-.preloader.hidden {
+body.loaded .preloader {
   opacity: 0;
-  overflow: hidden;
+  visibility: hidden;
   pointer-events: none;
-}
-
-body.light .preloader {
-  background: var(--accent-gradient-light);
 }
 
 /* ===== Elemen Section ===== */
@@ -308,7 +304,7 @@ footer a {
   max-height: 100px;
   max-width: 100px;
   object-fit: cover;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
@@ -349,7 +345,7 @@ footer a {
   font-size: 1rem;
   transition: all color 0.3s ease;
   outline: none;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
 } 
 
 /* === CSS for About Tabs === */
@@ -452,7 +448,7 @@ footer a {
 }
 
 .shop-categories button {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   padding: 10px 15px;
   margin-top: 20px;
   border-radius: var(--radius);
@@ -492,7 +488,7 @@ footer a {
 .product-item img {
   width: 70%;
   border-radius: var(--radius);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin-bottom: 20px;
 }
 
@@ -519,7 +515,7 @@ footer a {
 
 .scroll-buttons button {
   padding: 10px 15px;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   font-size: 15px;
   color: var(--theme-color);
@@ -570,7 +566,7 @@ footer a {
 
 /* Tombol Cancel */
 .remove-btn {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 8px 8px;
@@ -617,7 +613,7 @@ footer a {
 }
   
 #clear-cart {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   outline: none;
 }
 
@@ -718,7 +714,7 @@ footer a {
 .btn-playpause {
   margin-bottom: 20px;
   background: transparent;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   color: inherit;
   cursor: pointer;
@@ -785,8 +781,8 @@ footer a {
 
   <!-- Preloader -->
   <div class="preloader" id="Preloader">
-    <div class="preload neumorphic" id="secretLoader" title="Secret Loader">
-      <i class="fas fa-fingerprint"></i>
+    <div class="preload box-inout" id="secretLoader" title="Secret Loader">
+      <i class="fas fa-gear rotating-gear"></i>
     </div>
   </div>
 
@@ -858,12 +854,12 @@ footer a {
     <div class="timeline-item box-inset">  
       <i class="fas fa-user-edit icon"></i>  
       <span>Volunteer</span>  
-      <h3>Personal Branding & Storytelling</h3>  
+      <h3>Personal Branding</h3>  
     </div>  
     <div class="timeline-item box-inset">  
       <i class="fas fa-laptop-code icon"></i>  
-      <span>Self Projects</span>  
-      <h3>UI/UX Designer & Web Developer</h3>  
+      <span>Projects</span>  
+      <h3>UI/UX Web Designer</h3>  
     </div>  
   </div>  
 </div>  
@@ -1319,18 +1315,18 @@ document.querySelectorAll('.neumorphic').forEach(el => {
   el.addEventListener('mouseleave', () => el.classList.remove('pressed'));
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const preloader = document.getElementById("Preloader");
-  const secretLoader = document.getElementById("secretLoader");
 
-  // Klik untuk langsung buka
-  secretLoader.addEventListener("click", () => {
-    preloader.style.opacity = "0";
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 300); // tunggu animasi fade-out
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const preloader = document.getElementById("preloader");
+
+  // Delay sebelum hilang (dalam ms)
+  const delay = 3000; // 3 detik
+
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, delay);
 });
+
 
 const typed = new Typed("#typed", {
   strings: ["Tech Explorer","Art Enthusiast","Creative Digital","Development Stream"],
